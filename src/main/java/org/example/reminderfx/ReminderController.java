@@ -12,6 +12,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.stage.Stage;
 import javafx.util.Callback;
+import org.w3c.dom.ls.LSOutput;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -43,22 +44,25 @@ public class ReminderController {
         priorityColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getPriority()));
 
         // Buttons
-        addEditButtonToTable();
-        addDeleteButtonToTable();
+        EditButtonToTable();
+        DeleteButtonToTable();
 
         // Update table view
         updateTableView();
     }
 
-    private void addEditButtonToTable() {
+    private void EditButtonToTable() {
         Callback<TableColumn<Reminder, Void>, TableCell<Reminder, Void>> cellFactory = new Callback<>() {
             @Override
             public TableCell<Reminder, Void> call(final TableColumn<Reminder, Void> param) {
                 return new TableCell<>() {
+
                     private final Button btn = new Button("Edit");
 
                     {
                         btn.setOnAction(event -> {
+
+                            System.out.println("Edit clicked");
                             Reminder reminder = getTableView().getItems().get(getIndex());
 
                             try {
@@ -73,12 +77,9 @@ public class ReminderController {
                                 stage.setTitle("Edit Reminder");
                                 stage.show();
 
-
-
                             } catch (IOException e) {
                                 e.printStackTrace();
                             }
-
                         });
                     }
 
@@ -98,22 +99,22 @@ public class ReminderController {
         editColumn.setCellFactory(cellFactory);
     }
 
-
-
-    private void addDeleteButtonToTable() {
+    //Todo Remove reminder from the table view through the index
+    private void DeleteButtonToTable() {
         Callback<TableColumn<Reminder, Void>, TableCell<Reminder, Void>> cellFactory = new Callback<>() {
             @Override
             public TableCell<Reminder, Void> call(final TableColumn<Reminder, Void> param) {
                 return new TableCell<>() {
-                    private final Button btn = new Button("Eliminar");
+                    private final Button btn = new Button("Delete");
 
                     {
                         btn.setOnAction(event -> {
                             Reminder reminder = getTableView().getItems().get(getIndex());
-                            // Lógica para remover o reminder
+                            int index = reminder.getIndex(); // Obtém o índice do lembrete
+
+                            // Remove the reminder from the CSV file and the table view
+                            Utils.deleteReminderByIndex(index);
                             getTableView().getItems().remove(reminder);
-                            System.out.println("Eliminado: " + reminder);
-                            // Adicionalmente, remova do arquivo CSV se necessário
                         });
                     }
 
@@ -132,6 +133,14 @@ public class ReminderController {
 
         deleteColumn.setCellFactory(cellFactory);
     }
+
+
+
+
+
+
+
+
 
     public void onNewReminderButtonClick(ActionEvent actionEvent) {
         try {

@@ -11,10 +11,10 @@ public class Reminder {
     private String time;
     @FXML
     private String priority;
-    private String hash;
+    private int index;
 
     public Reminder(String description, String date, String time, String priority) {
-        this.hash = generateReminderHash();
+        this.index = index;
         this.description = description;
         this.date = date;
         this.time = time;
@@ -26,9 +26,13 @@ public class Reminder {
         return Utils.generateSHA256Hash(data);
     }
 
-    // Getters and setters for description, date, time, priority, and hash
-    public String getHash() {
-        return hash;
+
+    public int getIndex() {
+        return index;
+    }
+
+    public void setIndex(int index) {
+        this.index = index;
     }
 
     // Getters and setters

@@ -36,6 +36,8 @@ public class EditReminderController {
      */
     public void initialize() {
         Utils.initializeFields(descField, dateField, hourSpinner, minuteSpinner, priorityCB);
+
+
     }
 
     /*

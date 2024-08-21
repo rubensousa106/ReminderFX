@@ -4,7 +4,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import java.lang.String?>
-<StackPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.reminderfx.EditReminderController">
+<StackPane xmlns:fx="http://javafx.com/fxml" fx:controller="org.example.reminderfx.EditReminderController">
 
     <!-- TITLE -->
     <VBox spacing="10" StackPane.alignment="TOP_LEFT">
