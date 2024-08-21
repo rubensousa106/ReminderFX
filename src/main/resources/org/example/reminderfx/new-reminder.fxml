@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import java.lang.String?>
+<StackPane xmlns:fx="http://javafx.com/fxml" fx:controller="org.example.reminderfx.NewReminderController">
+
+    <!-- TITLE -->
+    <VBox spacing="10" StackPane.alignment="TOP_LEFT">
+        <padding>
+            <Insets bottom="0" left="20.0" right="20.0" top="20.0"/>
+        </padding>
+        <Label text="NEW REMINDER"/>
+    </VBox>
+
+    <!-- Main Content VBox -->
+    <VBox spacing="20" StackPane.alignment="CENTER">
+        <children>
+            <!-- GridPane to insert Description, Date, and Priority -->
+            <GridPane hgap="10" vgap="10">
+                <padding>
+                    <Insets bottom="0" left="20.0" right="20.0" top="45.0"/>
+                </padding>
+
+                <!-- Linha 0 -->
+
+                <Label text="Description:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+                <TextField fx:id="descField" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+
+                <!-- Linha 1 -->
+                <Label text="Date Time:" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+                <HBox spacing="5" GridPane.columnIndex="0" GridPane.rowIndex="3">
+                    <children>
+                        <DatePicker fx:id="dateField"/>
+                        <Spinner fx:id="hourSpinner" prefWidth="70" editable="true">
+                            <valueFactory>
+                                <SpinnerValueFactory.IntegerSpinnerValueFactory min="0" max="23" initialValue="12"/>
+                            </valueFactory>
+                        </Spinner>
+                        <Label text=":"/>
+                        <Spinner fx:id="minuteSpinner" prefWidth="70" editable="true">
+                            <valueFactory>
+                                <SpinnerValueFactory.IntegerSpinnerValueFactory min="0" max="59" initialValue="30"/>
+                            </valueFactory>
+                        </Spinner>
+                    </children>
+                </HBox>
+
+                <!-- Linha 2 -->
+                <Label text="Priority:" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
+                <ComboBox fx:id="priorityCB" GridPane.columnIndex="0" GridPane.rowIndex="5">
+                    <items>
+                        <FXCollections fx:factory="observableArrayList">
+                            <String fx:value="High"/>
+                            <String fx:value="Medium"/>
+                            <String fx:value="Low"/>
+                        </FXCollections>
+                    </items>
+                </ComboBox>
+            </GridPane>
+
+            <!-- Buttons Options -->
+            <HBox spacing="20" StackPane.alignment="TOP_LEFT">
+                <padding>
+                    <Insets bottom="5" left="10.0" right="20.0" top="250.0"/>
+                </padding>
+                <Button text="Save"  onAction="#onSaveButtonClick"/>
+                <Button text="Reset"  onAction="#onResetButtonClick"/>
+            </HBox>
+
+
+        </children>
+    </VBox>
+</StackPane>
