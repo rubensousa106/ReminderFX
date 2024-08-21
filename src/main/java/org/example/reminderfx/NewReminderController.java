@@ -9,6 +9,8 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import static org.example.reminderfx.Utils.generateSHA256Hash;
+
 public class NewReminderController {
 
     @FXML
@@ -76,13 +78,23 @@ public class NewReminderController {
      */
     public void writeInFile() {
         String filePath = "src/main/resources/data/data.csv";
+
+
+
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true /* append */))) {
-            String data = String.format("%s;%s;%02d;%02d;%s\n",
-                    descField.getText(),
-                    dateField.getValue().toString(),
-                    hourSpinner.getValue(),
-                    minuteSpinner.getValue(),
-                    priorityCB.getValue());
+            String description = descField.getText();
+            String date = dateField.getValue().toString();
+            int hour = hourSpinner.getValue();
+            int minute = minuteSpinner.getValue();
+            String priority = priorityCB.getValue();
+
+            // Generate hash for the reminder
+            String dataToHash = description + date + hour + ":" + minute + priority;
+            String hash = Utils.generateSHA256Hash(dataToHash);
+
+            // Write the data with the hash to the CSV file
+            String data = String.format("%s;%s;%02d;%02d;%s;%s\n",
+                    description, date, hour, minute, priority, hash);
             writer.write(data);
         } catch (IOException e) {
             e.printStackTrace();

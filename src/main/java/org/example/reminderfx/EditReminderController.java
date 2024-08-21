@@ -63,7 +63,7 @@ public class EditReminderController {
     public void setReminder(Reminder reminder) {
         this.reminder = reminder;
 
-        // Preencher os campos com os dados do reminder
+        // Populate Fields
         descField.setText(reminder.getDescription());
         dateField.setValue(LocalDate.parse(reminder.getDate()));
         hourSpinner.setValueFactory(hourSpinner.getValueFactory());
