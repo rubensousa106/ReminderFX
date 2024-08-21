@@ -1,6 +1,6 @@
 # ReminderFX
 
-**ReminderFX** is a desktop application built with JavaFX for managing reminders. Users can add, edit, and delete reminders with a description, date, time, and priority. Each reminder is associated with a SHA-256 hash to ensure data integrity.
+**ReminderFX** is a desktop application built with JavaFX for managing reminders. Users can add, edit, and delete reminders with a description, date, time, and priority.
 
 ## Features
 
